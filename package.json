@@ -1,7 +1,7 @@
 {
-  "name": "github-user-search",
+  "name": "github-user-app",
   "version": "1.0.0",
-  "description": "Professional GitHub User Search Application built with React",
+  "description": "Github User App built with React",
   "type": "module",
   "scripts": {
     "dev": "vite",

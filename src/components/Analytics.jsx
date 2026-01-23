@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ContributionHeatmap from './ContributionHeatmap'
 import LanguageChart from './LanguageChart'
 import ActivityFeed from './ActivityFeed'
 import ProductivityInsights from './ProductivityInsights'
@@ -97,11 +96,6 @@ export default function Analytics({ username }) {
       </div>
 
       <div className="analytics-grid">
-        {/* Contribution Heatmap - Full Width */}
-        <div className="analytics-section full-width">
-          <ContributionHeatmap events={events} />
-        </div>
-
         {/* Language Chart and Activity Feed - Side by Side */}
         <div className="analytics-section">
           <LanguageChart languagesData={languagesData} />
