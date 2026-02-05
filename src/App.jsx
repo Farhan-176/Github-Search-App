@@ -3,6 +3,7 @@ import Header from './components/Header'
 import SearchSection from './components/SearchSection'
 import ResultsSection from './components/ResultsSection'
 import Analytics from './components/Analytics'
+import RepositoryExplorer from './components/RepositoryExplorer'
 import ToastContainer from './components/ToastContainer'
 import { useTheme } from './hooks/useTheme'
 import { useGitHubSearch } from './hooks/useGitHubSearch'
@@ -56,10 +57,10 @@ export default function App() {
     <div className="app" data-theme={theme}>
       <Header theme={theme} onThemeToggle={toggleTheme} />
       <main className="app-container">
-        <SearchSection 
-          onSearch={handleSearch} 
-          loading={loading} 
-          error={error} 
+        <SearchSection
+          onSearch={handleSearch}
+          loading={loading}
+          error={error}
           onErrorClose={clearError}
           suggestions={suggestions}
           searchingUsers={searchingUsers}
@@ -70,9 +71,15 @@ export default function App() {
         {(user || repos.length > 0) && (
           <>
             <ResultsSection user={user} repos={repos} loading={loading} />
-            
-            {user && (
-              <Analytics username={user.login} />
+
+            {user && repos.length > 0 && (
+              <>
+                <Analytics username={user.login} />
+                <RepositoryExplorer
+                  user={user}
+                  repos={repos}
+                />
+              </>
             )}
           </>
         )}

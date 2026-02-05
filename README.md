@@ -96,6 +96,16 @@ src/
 - **Toast Notifications** - User feedback system
 - **Accessibility** - WCAG 2.1 AA compliance
 
+### 🤖 AI-Powered Features (NEW!)
+- **📝 Profile Summary** - AI-generated professional summary of developer profiles
+- **💡 Project Recommendations** - Smart project ideas based on skills and interests
+- **📈 Skill Gap Analysis** - Identify missing skills and learning opportunities
+- **✍️ Bio Suggestions** - Generate creative GitHub bio ideas
+- **🔮 Career Path Predictions** - Predict potential career trajectories
+- **🎯 Learning Recommendations** - Personalized course and resource suggestions
+
+[Learn how to enable AI features →](./SETUP_AI_FEATURES.md)
+
 ## 🛠️ Development
 
 ### Key Technologies
