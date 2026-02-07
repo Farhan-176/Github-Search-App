@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import { useTheme } from '../hooks/useTheme'
 import './LanguageChart.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -50,8 +51,9 @@ const formatBytes = (bytes) => {
 }
 
 export default function LanguageChart({ languagesData }) {
-  // Get theme from document
-  const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark'
+  // Get theme from hook to ensure re-renders on theme change
+  const { theme } = useTheme()
+  const isDarkTheme = theme === 'dark'
 
   console.log('LanguageChart received:', languagesData)
 
@@ -104,10 +106,11 @@ export default function LanguageChart({ languagesData }) {
       legend: {
         position: 'right',
         labels: {
-          color: isDarkTheme ? '#c9d1d9' : '#24292e',
+          color: isDarkTheme ? '#ffffff' : '#24292e',
           padding: 15,
           font: {
-            size: 12,
+            size: 13,
+            weight: '600',
           },
           generateLabels: (chart) => {
             const data = chart.data
@@ -121,6 +124,7 @@ export default function LanguageChart({ languagesData }) {
                 return {
                   text: `${label} (${percentage}%)`,
                   fillStyle: data.datasets[0].backgroundColor[i],
+                  textDecoration: undefined,
                   hidden: false,
                   index: i,
                 }
@@ -132,8 +136,8 @@ export default function LanguageChart({ languagesData }) {
       },
       tooltip: {
         backgroundColor: isDarkTheme ? '#21262d' : '#e1e4e8',
-        titleColor: isDarkTheme ? '#c9d1d9' : '#24292e',
-        bodyColor: isDarkTheme ? '#c9d1d9' : '#24292e',
+        titleColor: isDarkTheme ? '#ffffff' : '#24292e',
+        bodyColor: isDarkTheme ? '#ffffff' : '#24292e',
         borderColor: isDarkTheme ? '#30363d' : '#d1d5da',
         borderWidth: 1,
         padding: 12,
@@ -165,7 +169,7 @@ export default function LanguageChart({ languagesData }) {
     <div className="language-chart">
       <h3>🗣️ Language Distribution</h3>
       <div className="chart-container">
-        <Doughnut data={chartData} options={options} />
+        <Doughnut key={theme} data={chartData} options={options} />
       </div>
     </div>
   )
