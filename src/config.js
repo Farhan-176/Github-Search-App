@@ -6,29 +6,6 @@ export const API_CONFIG = {
   TOKEN: import.meta.env.VITE_GITHUB_TOKEN || '',
 }
 
-export const AI_CONFIG = {
-  // OpenAI API configuration
-  OPENAI_API_KEY: import.meta.env.VITE_OPENAI_API_KEY || '',
-  OPENAI_BASE_URL: 'https://api.openai.com/v1',
-  MODEL: 'gpt-3.5-turbo', // or 'gpt-4' for better results
-  MAX_TOKENS: 1000,
-  TEMPERATURE: 0.7,
-
-  // Alternative: Use Anthropic Claude
-  ANTHROPIC_API_KEY: import.meta.env.VITE_ANTHROPIC_API_KEY || '',
-  ANTHROPIC_MODEL: 'claude-3-haiku-20240307',
-
-  // Alternative: Use Google Gemini Pro
-  GEMINI_API_KEY: import.meta.env.VITE_GEMINI_API_KEY || '',
-  GEMINI_MODEL: 'gemini-1.5-pro-latest', // Latest stable model for v1 API
-
-  // Provider priority (first available will be used)
-  PROVIDER_PRIORITY: ['gemini', 'openai', 'anthropic'],
-
-  // Feature flags
-  ENABLED: import.meta.env.VITE_AI_ENABLED === 'true',
-}
-
 export const REPO_CONFIG = {
   PER_PAGE: 5,
   SORT: 'created',
