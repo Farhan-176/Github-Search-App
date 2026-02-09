@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { useTheme } from '../hooks/useTheme'
@@ -54,8 +54,21 @@ export default function LanguageChart({ languagesData }) {
   // Get theme from hook to ensure re-renders on theme change
   const { theme } = useTheme()
   const isDarkTheme = theme === 'dark'
+  const [isMobile, setIsMobile] = useState(false)
 
-  console.log('LanguageChart received:', languagesData)
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 480px)')
+    const update = () => setIsMobile(mediaQuery.matches)
+
+    update()
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', update)
+      return () => mediaQuery.removeEventListener('change', update)
+    }
+
+    mediaQuery.addListener(update)
+    return () => mediaQuery.removeListener(update)
+  }, [])
 
   const chartData = useMemo(() => {
     if (!languagesData || languagesData.length === 0) {
@@ -104,14 +117,15 @@ export default function LanguageChart({ languagesData }) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'right',
+        position: isMobile ? 'bottom' : 'right',
         labels: {
           color: isDarkTheme ? '#ffffff' : '#24292e',
-          padding: 15,
+          padding: isMobile ? 10 : 15,
           font: {
-            size: 13,
+            size: isMobile ? 11 : 13,
             weight: '600',
           },
+          boxWidth: isMobile ? 10 : 12,
           generateLabels: (chart) => {
             const data = chart.data
             if (data.labels.length && data.datasets.length) {

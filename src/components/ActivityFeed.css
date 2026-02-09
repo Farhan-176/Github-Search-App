@@ -2,7 +2,7 @@
   background: var(--color-bg-secondary);
   border-radius: 12px;
   padding: var(--space-3);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-6);
   border: 1px solid var(--color-border);
 }
 
@@ -15,25 +15,26 @@
 .activity-list {
   max-height: 500px;
   overflow-y: auto;
-  padding-right: var(--space-1);
+  padding-right: var(--space-2);
+  margin-right: calc(-1 * var(--space-1));
 }
 
 .activity-list::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .activity-list::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
-  border-radius: 3px;
+  background: transparent;
+  border-radius: 2px;
 }
 
 .activity-list::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .activity-list::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
+  background: var(--color-text-tertiary);
 }
 
 .activity-item {
@@ -61,7 +62,8 @@
 
 .activity-content {
   flex: 1;
-  min-width: 0; /* Allow text truncation */
+  min-width: 0;
+  /* Allow text truncation */
 }
 
 .activity-header {

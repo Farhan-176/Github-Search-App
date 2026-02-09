@@ -10,8 +10,6 @@ export default function ProductivityInsights({ events }) {
   // Get theme from document
   const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark'
   
-  console.log('ProductivityInsights received:', events)
-  
   const insights = useMemo(() => {
     if (!events || events.length === 0) return null
 
@@ -161,16 +159,49 @@ export default function ProductivityInsights({ events }) {
         </div>
       </div>
 
+      {/* Mobile Text View */}
+      <div className="insights-text">
+        <div className="text-insight">
+          <p><strong>Day of Week Distribution:</strong></p>
+          <ul>
+            {dayNames.map((day, idx) => (
+              insights.byDay[idx] > 0 && (
+                <li key={idx}>{day}: <strong>{insights.byDay[idx]} commits</strong></li>
+              )
+            ))}
+          </ul>
+        </div>
+
+        <div className="text-insight">
+          <p><strong>Peak Hours:</strong></p>
+          <ul>
+            {insights.byHour
+              .map((commits, hour) => ({ hour, commits }))
+              .filter(item => item.commits > 0)
+              .sort((a, b) => b.commits - a.commits)
+              .slice(0, 5)
+              .map((item, idx) => (
+                <li key={idx}>{item.hour}:00 - {item.commits} commits</li>
+              ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Desktop Chart View */}
       <div className="charts-grid">
         <div className="chart-section">
-          <h4>📅 Commits by Day of Week</h4>
+          <div className="chart-header">
+            <h4>📅 Commits by Day of Week</h4>
+          </div>
           <div className="chart-wrapper">
             <Bar data={dayChartData} options={chartOptions} />
           </div>
         </div>
 
         <div className="chart-section">
-          <h4>🕐 Commits by Hour of Day</h4>
+          <div className="chart-header">
+            <h4>🕐 Commits by Hour of Day</h4>
+          </div>
           <div className="chart-wrapper">
             <Bar data={hourChartData} options={chartOptions} />
           </div>

@@ -26,9 +26,6 @@ export default function Analytics({ username }) {
           fetchAllReposForLanguages(username),
         ])
 
-        console.log('Events result:', eventsResult)
-        console.log('Languages result:', languagesResult)
-
         if (!eventsResult.success) {
           throw new Error(eventsResult.error)
         }
@@ -36,7 +33,6 @@ export default function Analytics({ username }) {
         setEvents(eventsResult.data || [])
         setLanguagesData(languagesResult.success ? languagesResult.data.languagesData : [])
       } catch (err) {
-        console.error('Analytics error:', err)
         setError(err.message || 'Failed to load analytics data')
       } finally {
         setLoading(false)
